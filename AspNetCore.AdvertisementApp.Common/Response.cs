@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AspNetCore.AdvertisementApp.Common.Enums;
 
 namespace AspNetCore.AdvertisementApp.Common
 {
@@ -21,12 +17,5 @@ namespace AspNetCore.AdvertisementApp.Common
 
         public string Message { get; set; }
         public ResponseType ResponseType { get; set; }
-    }
-
-    public enum ResponseType
-    {
-        Success,
-        ValidationError,
-        NotFound
-    }
+    } 
 }
