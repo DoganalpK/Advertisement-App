@@ -17,8 +17,10 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Interfaces
         Task<T> FindAsync(object id);
         Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool asNoTracking = false);
         Task CreateAsync(T entity);
-        IQueryable<T> GetQuery();
         void Remove(T entity);
         void Update(T entity, T unchanged);
+        IQueryable<T> GetQuery();
+        Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+        Task<int> CountAsync(Expression<Func<T, bool>> filter);
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCore.AdvertisementApp.DataAccess.UnitOfWork
 {
-    public class Uow
+    public class Uow : IUow
     {
         private readonly AppDbContext _context;
 

@@ -20,57 +20,69 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Repositories
             _context = context;
         }
 
+        private DbSet<T> Table { get => _context.Set<T>(); }
+
         public async Task<List<T>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await Table.ToListAsync();
         }
 
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
         {
-            return await _context.Set<T>().Where(filter).AsNoTracking().ToListAsync();
+            return await Table.Where(filter).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, TKey>> selector, OrderByType orderByType = OrderByType.DESC)
         {
-            return orderByType == OrderByType.ASC ? await _context.Set<T>().OrderBy(selector).AsNoTracking().ToListAsync() 
-                : await _context.Set<T>().OrderByDescending(selector).AsNoTracking().ToListAsync();
+            return orderByType == OrderByType.ASC ? await Table.OrderBy(selector).AsNoTracking().ToListAsync() 
+                : await Table.OrderByDescending(selector).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> selector, OrderByType orderByType = OrderByType.DESC)
         {
-            return orderByType == OrderByType.ASC ? await _context.Set<T>().Where(filter).OrderBy(selector).AsNoTracking().ToListAsync()
-                : await _context.Set<T>().Where(filter).OrderByDescending(selector).AsNoTracking().ToListAsync();
+            return orderByType == OrderByType.ASC ? await Table.Where(filter).OrderBy(selector).AsNoTracking().ToListAsync()
+                : await Table.Where(filter).OrderByDescending(selector).AsNoTracking().ToListAsync();
         }
 
         public async Task<T> FindAsync(object id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await Table.FindAsync(id);
         }
 
         public async Task<T> GetByFilterAsync(Expression<Func<T,bool>> filter, bool asNoTracking = false)
         {
-            return asNoTracking == true ? await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter) :
-                await _context.Set<T>().SingleOrDefaultAsync(filter);
+            return asNoTracking == true ? await Table.AsNoTracking().SingleOrDefaultAsync(filter) :
+                await Table.SingleOrDefaultAsync(filter);
         }
 
         public async Task CreateAsync(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            await Table.AddAsync(entity);
         }
 
         public IQueryable<T> GetQuery()
         {
-            return _context.Set<T>().AsQueryable();
+            return Table.AsQueryable();
         }
 
         public void Remove(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            Table.Remove(entity);
         }        
 
         public void Update(T entity, T unchanged)
         {
             _context.Entry(unchanged).CurrentValues.SetValues(entity);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await Table.AnyAsync(filter);
+        }
+
+        public async Task<int> CountAsync(Expression<Func<T, bool>> filter)
+        {
+            return await Table.CountAsync(filter);
         }
     }
 }

@@ -1,12 +1,6 @@
-﻿using AspNetCore.AdvertisementApp.DataAccess.Configurations;
-using AspNetCore.AdvertisementApp.Entities;
+﻿using AspNetCore.AdvertisementApp.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace AspNetCore.AdvertisementApp.DataAccess.Contexts
 {
@@ -18,15 +12,16 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AdvertisementAppUserConfiguration());
-            modelBuilder.ApplyConfiguration(new AdvertisementAppUserStatusConfiguration());
-            modelBuilder.ApplyConfiguration(new AdvertisementConfiguration());
-            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
-            modelBuilder.ApplyConfiguration(new GenderConfiguration());
-            modelBuilder.ApplyConfiguration(new MilitaryStatusConfiguration());
-            modelBuilder.ApplyConfiguration(new ProviderServiceConfiguration());
+            //modelBuilder.ApplyConfiguration(new AdvertisementAppUserConfiguration());
+            //modelBuilder.ApplyConfiguration(new AdvertisementAppUserStatusConfiguration());
+            //modelBuilder.ApplyConfiguration(new AdvertisementConfiguration());
+            //modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            //modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            //modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
+            //modelBuilder.ApplyConfiguration(new GenderConfiguration());
+            //modelBuilder.ApplyConfiguration(new MilitaryStatusConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProviderServiceConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public DbSet<Advertisement> Advertisements { get; set; }
