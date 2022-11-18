@@ -26,6 +26,7 @@ namespace AspNetCore.AdvertisementApp.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencies(_configuration);
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,14 +37,13 @@ namespace AspNetCore.AdvertisementApp.WebUI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

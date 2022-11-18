@@ -1,4 +1,4 @@
-﻿using AspNetCore.AdvertisementApp.Dtos.ProviderServiceDtos;
+﻿using AspNetCore.AdvertisementApp.Dtos;
 using FluentValidation;
 
 namespace AspNetCore.AdvertisementApp.Business.ValidationRules.FluentValidation

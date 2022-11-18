@@ -1,4 +1,4 @@
-﻿using AspNetCore.AdvertisementApp.Dtos.ProviderServiceDtos;
+﻿using AspNetCore.AdvertisementApp.Dtos;
 using AspNetCore.AdvertisementApp.Entities;
 using AutoMapper;
 
@@ -10,7 +10,7 @@ namespace AspNetCore.AdvertisementApp.Business.Mappings.AutoMapper
         {
             CreateMap<ProviderServiceCreateDto, ProviderService>().ReverseMap();
             CreateMap<ProviderServiceUpdateDto, ProviderService>().ReverseMap();
-            CreateMap<ProviderServiceListDto, ProviderServiceListDto>().ReverseMap();
+            CreateMap<ProviderServiceListDto, ProviderService>().ReverseMap();
         }
     }
 }

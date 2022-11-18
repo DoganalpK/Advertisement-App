@@ -1,6 +1,6 @@
 ﻿using AspNetCore.AdvertisementApp.Dtos.Interfaces;
 
-namespace AspNetCore.AdvertisementApp.Dtos.ProviderServiceDtos
+namespace AspNetCore.AdvertisementApp.Dtos
 {
     public class ProviderServiceCreateDto : IDto
     {

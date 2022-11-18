@@ -1,6 +1,6 @@
 ﻿using AspNetCore.AdvertisementApp.Common;
 using AspNetCore.AdvertisementApp.Dtos.Interfaces;
-using AspNetCore.AdvertisementApp.Dtos.ProviderServiceDtos;
+using AspNetCore.AdvertisementApp.Dtos;
 using AspNetCore.AdvertisementApp.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
