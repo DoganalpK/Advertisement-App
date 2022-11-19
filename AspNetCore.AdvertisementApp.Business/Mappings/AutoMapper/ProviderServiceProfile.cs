@@ -8,9 +8,9 @@ namespace AspNetCore.AdvertisementApp.Business.Mappings.AutoMapper
     {
         public ProviderServiceProfile()
         {
-            CreateMap<ProviderServiceCreateDto, ProviderService>().ReverseMap();
-            CreateMap<ProviderServiceUpdateDto, ProviderService>().ReverseMap();
-            CreateMap<ProviderServiceListDto, ProviderService>().ReverseMap();
+            CreateMap<ProviderService, ProviderServiceCreateDto>().ReverseMap();
+            CreateMap<ProviderService, ProviderServiceUpdateDto>().ReverseMap();
+            CreateMap<ProviderService, ProviderServiceListDto>().ReverseMap();
         }
     }
 }

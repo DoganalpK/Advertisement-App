@@ -26,17 +26,26 @@ namespace AspNetCore.AdvertisementApp.Business.DependencyResolvers.Microsoft
             {
                 opt.AddProfile(new ProviderServiceProfile());
                 opt.AddProfile(new AdvertisementProfile());
+                opt.AddProfile(new AppUserProfile());
+                opt.AddProfile(new GenderProfile());
             });
 
             var mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped<IUow, Uow>();
+            services.AddScoped<IProviderServiceService, ProviderServiceService>();
+            services.AddScoped<IAdvertisementService, AdvertisementService>();
+            services.AddScoped<IAppUserService, AppUserService>();
+            services.AddScoped<IGenderService, GenderService>();
+
             services.AddTransient<IValidator<ProviderServiceCreateDto>, ProviderServiceCreateDtoValidator>();
             services.AddTransient<IValidator<ProviderServiceUpdateDto>, ProviderServiceUpdateDtoValidator>();
             services.AddTransient<IValidator<AdvertisementCreateDto>, AdvertisementCreateDtoValidator>();
             services.AddTransient<IValidator<AdvertisementUpdateDto>, AdvertisementUpdateDtoValidator>();
-            services.AddScoped<IProviderServiceService, ProviderServiceService>();
-            services.AddScoped<IAdvertisementService, AdvertisementService>();
+            services.AddTransient<IValidator<AppUserCreateDto>,AppUserCreateDtoValidator>();
+            services.AddTransient<IValidator<AppUserUpdateDto>, AppUserUpdateDtoValidator>();
+            services.AddTransient<IValidator<GenderCreateDto>, GenderCreateDtoValidator>();
+            services.AddTransient<IValidator<GenderUpdateDto>,GenderUpdateDtoValidator>();
         }
     }
 }
