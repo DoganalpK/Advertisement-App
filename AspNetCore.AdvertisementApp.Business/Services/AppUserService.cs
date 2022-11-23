@@ -1,4 +1,8 @@
-﻿using AspNetCore.AdvertisementApp.Business.Interfaces;
+﻿using AspNetCore.AdvertisementApp.Business.Extensions;
+using AspNetCore.AdvertisementApp.Business.Interfaces;
+using AspNetCore.AdvertisementApp.Common;
+using AspNetCore.AdvertisementApp.Common.Enums;
+using AspNetCore.AdvertisementApp.DataAccess.Repositories;
 using AspNetCore.AdvertisementApp.DataAccess.UnitOfWork;
 using AspNetCore.AdvertisementApp.Dtos;
 using AspNetCore.AdvertisementApp.Entities;
@@ -14,9 +18,51 @@ namespace AspNetCore.AdvertisementApp.Business.Services
 {
     public class AppUserService : Service<AppUserCreateDto, AppUserUpdateDto, AppUserListDto, AppUser>, IAppUserService
     {
-        public AppUserService(IMapper mapper, IValidator<AppUserCreateDto> createDtoValitador, IValidator<AppUserUpdateDto> updateDtoValidator, IUow uow)
+        private readonly IUow _uow;
+        private readonly IMapper _mapper;
+        private readonly IValidator<AppUserCreateDto> _createValidator;
+        private readonly IValidator<AppUserLoginDto> _loginDtoValidator;
+        public AppUserService(IMapper mapper, IValidator<AppUserCreateDto> createDtoValitador, IValidator<AppUserUpdateDto> updateDtoValidator, IUow uow, IValidator<AppUserCreateDto> createValidator, IValidator<AppUserLoginDto> loginDtoValidator)
             : base(mapper, createDtoValitador, updateDtoValidator, uow)
         {
+            _uow = uow;
+            _mapper = mapper;
+            _createValidator = createValidator;
+            _loginDtoValidator = loginDtoValidator;
+        }
+
+        public async Task<IResponse<AppUserCreateDto>> CreateWithRoleAsync(AppUserCreateDto dto, int roleId)
+        {
+            var validationResult = _createValidator.Validate(dto);
+            if (validationResult.IsValid)
+            {
+                var user = _mapper.Map<AppUser>(dto);
+                await _uow.GetRepository<AppUser>().CreateAsync(user);
+                await _uow.GetRepository<AppUserRole>().CreateAsync(new AppUserRole
+                {
+                    AppUser = user,
+                    AppRoleId = roleId
+                });
+                await _uow.SaveChangesAsync();
+
+                return new Response<AppUserCreateDto>(ResponseType.Success, dto);
+            }
+            return new Response<AppUserCreateDto>(dto, validationResult.ConvertToCustomValidationError());
+        }
+        public async Task<IResponse<AppUserListDto>> CheckUserAsync(AppUserLoginDto dto)
+        {
+            var validationResult = _loginDtoValidator.Validate(dto);
+            if (validationResult.IsValid)
+            {
+                var user = await _uow.GetRepository<AppUser>().GetByFilterAsync(x => x.Username == dto.Username && x.Password == dto.Password);
+                if (user != null)
+                {
+                    var appUserDto = _mapper.Map<AppUserListDto>(user);
+                    return new Response<AppUserListDto>(ResponseType.Success, appUserDto);
+                }
+                return new Response<AppUserListDto>(ResponseType.NotFound, "Cant find user.");
+            }
+            return new Response<AppUserListDto>(ResponseType.ValidationError, "Username or password is not match.");
         }
     }
 }
