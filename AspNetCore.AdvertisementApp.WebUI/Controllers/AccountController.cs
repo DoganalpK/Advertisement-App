@@ -5,8 +5,12 @@ using AspNetCore.AdvertisementApp.WebUI.Extensions;
 using AspNetCore.AdvertisementApp.WebUI.Models;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AspNetCore.AdvertisementApp.WebUI.Controllers
@@ -62,15 +66,47 @@ namespace AspNetCore.AdvertisementApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public async IActionResult SignIn(AppUserLoginDto dto)
+        public async Task<IActionResult> SignIn(AppUserLoginDto dto)
         {
             var result = await _appUserService.CheckUserAsync(dto);
             if (result.ResponseType == ResponseType.Success)
             {
+                var roleResult = await _appUserService.GetRolesByUserIdAsync(result.Data.Id);
+                var claims = new List<Claim>();
 
+                if (roleResult.ResponseType == ResponseType.Success)
+                {
+                    foreach (var role in roleResult.Data)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, role.Defination));
+                    }
+                }
+
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, result.Data.Id.ToString()));
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = false,
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
+                return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError("",dto.)
+
+            ModelState.AddModelError("User name or password is not match.", result.Message);
             return View(dto);
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -64,5 +64,17 @@ namespace AspNetCore.AdvertisementApp.Business.Services
             }
             return new Response<AppUserListDto>(ResponseType.ValidationError, "Username or password is not match.");
         }
+
+        public async Task<IResponse<List<AppRoleListDto>>> GetRolesByUserIdAsync(int userId)
+        {
+            var roles = await _uow.GetRepository<AppRole>().GetAllAsync(x => x.AppUserRoles.Any(x => x.AppUserId == userId));
+            if (roles == null)
+            {
+                return new Response<List<AppRoleListDto>>(ResponseType.NotFound, "Cant found role.");
+            }
+
+            var dto = _mapper.Map<List<AppRoleListDto>>(roles);
+            return new Response<List<AppRoleListDto>>(ResponseType.Success, dto);
+        }
     }
 }
