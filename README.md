@@ -19,7 +19,8 @@ Asp-Net-Core-Advertisement-App
 
 - [x] C#
 - [x] .Net(5)
-- [x] Dependency Injection
+- [x] Unit of Work & Generic Repository Design Pattern
 - [x] Entityframework Core
 - [x] AutoMapper
 - [x] Fluent Validation
+- [x] Dependency Injection
