@@ -8,18 +8,18 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<AppRole> builder)
         {
-            builder.Property(x => x.Defination).HasMaxLength(300).IsRequired();
+            builder.Property(x => x.Definition).HasMaxLength(300).IsRequired();
             builder.HasData(new AppRole[]
             {
                 new()
                 {
                     Id=1,
-                    Defination="Member"
+                    Definition="Member"
                 },
                 new()
                 {
                     Id=2,
-                    Defination="Admin"
+                    Definition="Admin"
                 }
             });
         }

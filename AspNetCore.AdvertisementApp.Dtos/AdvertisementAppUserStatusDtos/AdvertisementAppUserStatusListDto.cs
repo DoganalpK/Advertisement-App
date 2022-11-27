@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNetCore.AdvertisementApp.Entities
+namespace AspNetCore.AdvertisementApp.Dtos
 {
-    public class MilitaryStatus : BaseEntity
+    public class AdvertisementAppUserStatusListDto
     {
         public string Definition { get; set; }
-        public List<AdvertisementAppUser> AdvertisementAppUsers { get; set; }
     }
 }

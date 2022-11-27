@@ -8,7 +8,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<MilitaryStatus> builder)
         {
-            builder.Property(x => x.Defination).HasMaxLength(300).IsRequired();
+            builder.Property(x => x.Definition).HasMaxLength(300).IsRequired();
         }
     }
 }

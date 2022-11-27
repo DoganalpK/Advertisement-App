@@ -4,7 +4,7 @@ namespace AspNetCore.AdvertisementApp.Entities
 {
     public class AdvertisementAppUserStatus : BaseEntity
     {
-        public string Defination { get; set; }
+        public string Definition { get; set; }
         public List<AdvertisementAppUser> AdvertisementAppUsers { get; set; }
     }
 }

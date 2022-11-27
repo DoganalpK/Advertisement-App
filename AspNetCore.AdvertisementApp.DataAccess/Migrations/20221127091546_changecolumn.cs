@@ -2,7 +2,7 @@
 
 namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
 {
-    public partial class AddedRoles2 : Migration
+    public partial class changecolumn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

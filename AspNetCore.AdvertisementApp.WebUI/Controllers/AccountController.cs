@@ -78,7 +78,7 @@ namespace AspNetCore.AdvertisementApp.WebUI.Controllers
                 {
                     foreach (var role in roleResult.Data)
                     {
-                        claims.Add(new Claim(ClaimTypes.Role, role.Defination));
+                        claims.Add(new Claim(ClaimTypes.Role, role.Definition));
                     }
                 }
 

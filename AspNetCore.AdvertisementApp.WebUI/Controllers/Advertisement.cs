@@ -26,9 +26,11 @@ namespace AspNetCore.AdvertisementApp.WebUI.Controllers
             _advertisementAppUserService = advertisementAppUserService;
         }
 
-        public IActionResult Index()
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AppliedList(AdvertisementAppUserStatusType type)
         {
-            return View();
+            var list = await _advertisementAppUserService.GetListAsync(type);
+            return View(list);
         }
 
         [Authorize(Roles = "Member")]
@@ -90,6 +92,13 @@ namespace AspNetCore.AdvertisementApp.WebUI.Controllers
             }
 
             return this.ResponseRedirectAction(response, "HumanResource", "Home");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> SetStatus(int advertisementAppUserId, AdvertisementAppUserStatusType type)
+        {
+            await _advertisementAppUserService.SetStatusAsync(advertisementAppUserId, type);
+            return RedirectToAction("AppliedList");
         }
     }
 }

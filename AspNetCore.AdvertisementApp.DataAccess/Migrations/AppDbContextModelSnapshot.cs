@@ -97,7 +97,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Defination")
+                    b.Property<string>("Definition")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -114,7 +114,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Defination")
+                    b.Property<string>("Definition")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -127,12 +127,12 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Defination = "Member"
+                            Definition = "Member"
                         },
                         new
                         {
                             Id = 2,
-                            Defination = "Admin"
+                            Definition = "Admin"
                         });
                 });
 
@@ -224,7 +224,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Defination")
+                    b.Property<string>("Definition")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221108060714_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221127091546_changecolumn")]
+    partial class changecolumn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,7 +99,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Defination")
+                    b.Property<string>("Definition")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -116,7 +116,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Defination")
+                    b.Property<string>("Definition")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -124,6 +124,18 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Definition = "Member"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Definition = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("AspNetCore.AdvertisementApp.Entities.AppUser", b =>
@@ -214,7 +226,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Defination")
+                    b.Property<string>("Definition")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");

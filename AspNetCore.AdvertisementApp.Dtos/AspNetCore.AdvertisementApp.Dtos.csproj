@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetCore.AdvertisementApp.Entities\AspNetCore.AdvertisementApp.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

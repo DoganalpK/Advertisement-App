@@ -16,6 +16,8 @@ namespace AspNetCore.AdvertisementApp.Business.Profiles
                 new GenderProfile(),
                 new AppRoleProfile(),
                 new AdvertisementAppUserProfile(),
+                new AdvertisementAppUserStatusProfile(),
+                new MilitaryStatusProfile(),
             };
         }
     }

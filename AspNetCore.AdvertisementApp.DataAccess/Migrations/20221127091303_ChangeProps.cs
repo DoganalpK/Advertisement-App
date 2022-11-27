@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class ChangeProps : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Defination = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
+                    Definition = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Defination = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
+                    Definition = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Defination = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
+                    Definition = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -183,6 +183,16 @@ namespace AspNetCore.AdvertisementApp.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AppRoles",
+                columns: new[] { "Id", "Definition" },
+                values: new object[] { 1, "Member" });
+
+            migrationBuilder.InsertData(
+                table: "AppRoles",
+                columns: new[] { "Id", "Definition" },
+                values: new object[] { 2, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdvertisementAppUsers_AdvertisementAppUserStatusId",

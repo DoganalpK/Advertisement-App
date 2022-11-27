@@ -9,6 +9,7 @@ namespace AspNetCore.AdvertisementApp.Business.Mappings.AutoMapper
         public AdvertisementAppUserProfile()
         {
             CreateMap<AdvertisementAppUser, AdvertisementAppUserCreateDto>().ReverseMap();
+            CreateMap<AdvertisementAppUser, AdvertisementAppUserListDto>().ReverseMap();
         }
     }
 }
