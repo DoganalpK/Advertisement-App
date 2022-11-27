@@ -2,12 +2,13 @@
 using AspNetCore.AdvertisementApp.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Configuration;
 
 namespace AspNetCore.AdvertisementApp.WebUI.Extensions
 {
     public static class ControllerExtensions
     {
-        public static IActionResult ResponseRedirectAction<T>(this Controller controller, IResponse<T> response, string actionName)
+        public static IActionResult ResponseRedirectAction<T>(this Controller controller, IResponse<T> response, string actionName, string controllerName = "")
         {
             if (response.ResponseType == ResponseType.NotFound)
                 return controller.NotFound();
@@ -19,7 +20,10 @@ namespace AspNetCore.AdvertisementApp.WebUI.Extensions
                 }
                 return controller.View(response.Data);
             }
-            return controller.RedirectToAction(actionName);
+            if (string.IsNullOrWhiteSpace(controllerName))
+                return controller.RedirectToAction(actionName);
+            else
+                return controller.RedirectToAction(actionName, controllerName);
         }
 
         public static IActionResult ResponseRedirectAction(this Controller controller, IResponse response, string actionName)

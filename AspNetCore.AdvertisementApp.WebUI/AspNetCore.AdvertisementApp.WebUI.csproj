@@ -15,4 +15,8 @@
     <ProjectReference Include="..\AspNetCore.AdvertisementApp.Business\AspNetCore.AdvertisementApp.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\CvFiles\" />
+  </ItemGroup>
+
 </Project>

@@ -99,7 +99,7 @@ namespace AspNetCore.AdvertisementApp.WebUI.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError("User name or password is not match.", result.Message);
+            ModelState.AddModelError("", result.Message);
             return View(dto);
         }
 

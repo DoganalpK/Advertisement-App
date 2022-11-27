@@ -5,6 +5,7 @@ using AspNetCore.AdvertisementApp.Business.ValidationRules.FluentValidation;
 using AspNetCore.AdvertisementApp.DataAccess.Contexts;
 using AspNetCore.AdvertisementApp.DataAccess.UnitOfWork;
 using AspNetCore.AdvertisementApp.Dtos;
+using AspNetCore.AdvertisementApp.Entities;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ namespace AspNetCore.AdvertisementApp.Business.DependencyResolvers.Microsoft
             services.AddScoped<IAdvertisementService, AdvertisementService>();
             services.AddScoped<IAppUserService, AppUserService>();
             services.AddScoped<IGenderService, GenderService>();
+            services.AddScoped<IAdvertisementAppUserService, AdvertisementAppUserService>();
 
             services.AddTransient<IValidator<ProviderServiceCreateDto>, ProviderServiceCreateDtoValidator>();
             services.AddTransient<IValidator<ProviderServiceUpdateDto>, ProviderServiceUpdateDtoValidator>();
@@ -38,6 +40,7 @@ namespace AspNetCore.AdvertisementApp.Business.DependencyResolvers.Microsoft
             services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
             services.AddTransient<IValidator<GenderCreateDto>, GenderCreateDtoValidator>();
             services.AddTransient<IValidator<GenderUpdateDto>, GenderUpdateDtoValidator>();
+            services.AddTransient<IValidator<AdvertisementAppUserCreateDto>, AdvertisementAppUserCreateDtoValidator>();
         }        
     }
 }

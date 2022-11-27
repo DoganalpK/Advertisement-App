@@ -19,12 +19,12 @@
                     <div>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a href="#">Apply</a>
+                            <a asp-action="Send" asp-controller="Advertisement" asp-route-advertisementId="@Model[i].Id">Apply</a>
                         }
                         else
                         {
                             <div class="alert alert-light text-center lead">
-                                You must Log In for apply job. <a href="#">Sign Up</a>
+                                You must Log In for apply job. <a asp-action="SignIn" asp-controller="Account">Sign In</a>
                             </div>
                         }
                     </div>

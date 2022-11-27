@@ -1,0 +1,39 @@
+﻿@model AdvertisementAppUserCreateModel
+@{
+    Layout = "_Layout";
+}
+
+<form class="w-75 mx-auto p-3" asp-action="Send" asp-controller="Advertisement" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="@Model.AdvertisementId" />
+    <input type="hidden" asp-for="@Model.AppUserId" />
+
+    <div class="mb-3">
+        <label>Military Status:</label>
+        <select asp-for="@Model.MilitaryStatusId" asp-items="Html.GetEnumSelectList<MilitaryStatusType>()">
+        </select>
+    </div>
+
+    <div id="dateDiv" class="mb-3">
+        <label>Military Date:</label>
+        <input type="date" asp-for="@Model.EndDate" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Work Experience(year):</label>
+        <input type="number" asp-for="@Model.WorkExperience" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Cv:</label>
+        <input type="file" asp-for="@Model.CvFile" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger">
+
+    </div>
+
+</form>
