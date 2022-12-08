@@ -17,6 +17,7 @@ Asp-Net-Core-Advertisement-App
 
 ## Languages & Tools
 
+- [x] N Tier Architecture
 - [x] C#
 - [x] .Net(5)
 - [x] Unit of Work & Generic Repository Design Pattern
